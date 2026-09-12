@@ -10,19 +10,22 @@ class Vehiculo:
         # Inicializa el atributo privado __en_taller en False (el vehÃ­culo parte fuera del taller)
         self.__en_taller = False
 
-    # MÃ©todo pÃºblico para obtener la patente del vehÃ­culo
-    def obtener_patente(self) -> str:
-        # Retorna el valor almacenado en el atributo privado __patente
+    # @property transforma el mÃ©todo en una propiedad de solo lectura para acceder a __patente como si fuera un atributo sintÃ¡cticamente (sin parÃ©ntesis)
+    @property
+    def patente(self) -> str:
+        # Retorna el valor del atributo privado __patente
         return self.__patente
 
-    # MÃ©todo pÃºblico para obtener el aÃ±o del vehÃ­culo
-    def obtener_anio(self) -> int:
-        # Retorna el valor almacenado en el atributo privado __anio
+    # @property transforma el mÃ©todo en una propiedad de solo lectura para acceder a __anio como si fuera un atributo sintÃ¡cticamente (sin parÃ©ntesis)
+    @property
+    def anio(self) -> int:
+        # Retorna el valor del atributo privado __anio
         return self.__anio
 
-    # MÃ©todo pÃºblico para consultar si el vehÃ­culo se encuentra en el taller
-    def esta_en_taller(self) -> bool:
-        # Retorna el valor booleano almacenado en el atributo privado __en_taller
+    # @property transforma el mÃ©todo en una propiedad de solo lectura para acceder a __en_taller como si fuera un atributo sintÃ¡cticamente (sin parÃ©ntesis)
+    @property
+    def en_taller(self) -> bool:
+        # Retorna el valor booleano del atributo privado __en_taller
         return self.__en_taller
 
     # MÃ©todo pÃºblico para registrar el ingreso del vehÃ­culo al taller mecÃ¡nico
