@@ -1,25 +1,36 @@
-﻿# Clase Vehiculo: Representa Ãºnicamente el molde o plantilla base para los vehÃ­culos del taller mecÃ¡nico.
+﻿# Clase Vehiculo: Representa la plantilla base para los vehÃ­culos del taller mecÃ¡nico.
 class Vehiculo:
-    # DeclaraciÃ³n de atributos con sus tipos de datos correspondientes
-    patente: str  # Atributo para almacenar la patente del vehÃ­culo (cadena de texto)
-    anio: int  # Atributo para almacenar el aÃ±o de fabricaciÃ³n (nÃºmero entero)
-    _en_taller: bool  # Atributo para registrar si el vehÃ­culo estÃ¡ en el taller (booleano)
 
     # MÃ©todo constructor que inicializa un nuevo objeto de la clase Vehiculo
     def __init__(self, patente: str, anio: int):
-        # Asigna la patente recibida como parÃ¡metro al atributo propio de la instancia
-        self.patente = patente
-        # Asigna el aÃ±o recibido como parÃ¡metro al atributo propio de la instancia
-        self.anio = anio
-        # Inicializa _en_taller en False de forma predeterminada (el vehÃ­culo reciÃ©n registrado no estÃ¡ en el taller)
-        self._en_taller = False
+        # Inicializa el atributo privado __patente con el valor de la patente recibida
+        self.__patente = patente
+        # Inicializa el atributo privado __anio con el valor del aÃ±o recibido
+        self.__anio = anio
+        # Inicializa el atributo privado __en_taller en False (el vehÃ­culo parte fuera del taller)
+        self.__en_taller = False
 
-    # MÃ©todo para registrar el ingreso del vehÃ­culo al taller mecÃ¡nico
+    # MÃ©todo pÃºblico para obtener la patente del vehÃ­culo
+    def obtener_patente(self) -> str:
+        # Retorna el valor almacenado en el atributo privado __patente
+        return self.__patente
+
+    # MÃ©todo pÃºblico para obtener el aÃ±o del vehÃ­culo
+    def obtener_anio(self) -> int:
+        # Retorna el valor almacenado en el atributo privado __anio
+        return self.__anio
+
+    # MÃ©todo pÃºblico para consultar si el vehÃ­culo se encuentra en el taller
+    def esta_en_taller(self) -> bool:
+        # Retorna el valor booleano almacenado en el atributo privado __en_taller
+        return self.__en_taller
+
+    # MÃ©todo pÃºblico para registrar el ingreso del vehÃ­culo al taller mecÃ¡nico
     def ingresar(self) -> None:
-        # Cambia el estado del atributo _en_taller a True indicando que el vehÃ­culo ingresÃ³ al taller
-        self._en_taller = True
+        # Cambia el estado del atributo privado __en_taller a True
+        self.__en_taller = True
 
-    # MÃ©todo para registrar la entrega del vehÃ­culo sacÃ¡ndolo del taller
+    # MÃ©todo pÃºblico para registrar la entrega del vehÃ­culo sacÃ¡ndolo del taller
     def entregar(self) -> None:
-        # Cambia el estado del atributo _en_taller a False indicando que el vehÃ­culo fue entregado
-        self._en_taller = False
+        # Cambia el estado del atributo privado __en_taller a False
+        self.__en_taller = False
