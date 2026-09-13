@@ -281,6 +281,20 @@ class Vehiculo(ABC):
 
 ---
 
+### ✅ Commit 18 — `test: captura de excepciones con try/except en main.py`
+**Archivo:** `main.py`
+
+Se implementa la **captura de excepciones** en `main.py` envolviendo la instanciación de un objeto con datos inválidos dentro de un bloque `try...except ValueError as error`. Esto demuestra la interacción entre la validación interna de la clase (`raise ValueError`) y el manejo controlado de errores en la capa de ejecución, evitando el colapso del programa. Se comentaron minuciosamente todas las líneas de código con propósito pedagógico.
+
+```python
+try:
+    auto_invalido = Auto("AB 12", 2021)
+except ValueError as error:
+    print(f"[EXCEPCION CAPTURADA] Mensaje: {error}")
+```
+
+---
+
 ## 🛠️ Estructura y Plan de Desarrollo Futuro
 
 1. **Gestión de Clientes y Personal:** Registro de propietarios, mecánicos y roles del taller.
@@ -296,3 +310,5 @@ class Vehiculo(ABC):
 - **v0.3.0:** Jerarquía de herencia con `Auto`, `Moto` y `Camion`. Polimorfismo aplicado en `tarifa_hora()`.
 - **v0.3.1:** Validación de precondiciones de estado para `ingresar()` y `entregar()` en la clase base `Vehiculo`.
 - **v0.4.0:** Transformación de `Vehiculo` en clase base abstracta (`ABC`) con `@abstractmethod` en `tarifa_hora()`.
+- **v0.4.1:** Demostración pedagógica del manejo de excepciones con `try...except` en `main.py`.
+
