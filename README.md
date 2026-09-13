@@ -295,6 +295,26 @@ except ValueError as error:
 
 ---
 
+### ✅ Commit 19 — `test: reforzamiento con múltiples except (ValueError, TypeError) y bloque finally`
+**Archivo:** `main.py`
+
+Se refuerza el manejo de excepciones estructurando bloques `try` con **múltiples cláusulas `except`** (primero `ValueError`, segundo `TypeError` y un genérico `Exception`) acompañados de un bloque **`finally`**. Se demuestran dos escenarios: uno que activa el `ValueError` por patente inválida y otro que activa el `TypeError` por instanciación directa de la clase base abstracta `Vehiculo`. En ambos casos, el bloque `finally` se ejecuta al cierre indicando la finalización del intento. Se comentaron minuciosamente todas las líneas de código.
+
+```python
+try:
+    auto_invalido = Auto("AB 12", 2021)
+except ValueError as error:
+    print(f"[ERROR DE VALOR CAPTURADO] {error}")
+except TypeError as error:
+    print(f"[ERROR DE TIPO CAPTURADO] {error}")
+except Exception as error:
+    print(f"[ERROR INESPERADO CAPTURADO] {error}")
+finally:
+    print("El intento de creación del valor ha finalizado.")
+```
+
+---
+
 ## 🛠️ Estructura y Plan de Desarrollo Futuro
 
 1. **Gestión de Clientes y Personal:** Registro de propietarios, mecánicos y roles del taller.
@@ -311,4 +331,6 @@ except ValueError as error:
 - **v0.3.1:** Validación de precondiciones de estado para `ingresar()` y `entregar()` en la clase base `Vehiculo`.
 - **v0.4.0:** Transformación de `Vehiculo` en clase base abstracta (`ABC`) con `@abstractmethod` en `tarifa_hora()`.
 - **v0.4.1:** Demostración pedagógica del manejo de excepciones con `try...except` en `main.py`.
+- **v0.4.2:** Estructura completa con múltiples `except` (`ValueError`, `TypeError`) y bloque `finally` en `main.py`.
+
 
