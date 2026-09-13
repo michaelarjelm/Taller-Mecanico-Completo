@@ -264,6 +264,23 @@ def entregar(self) -> None:
 
 ---
 
+### ✅ Commit 17 — `refactor: conversión de Vehiculo en clase base abstracta con ABC`
+**Archivos:** `vehiculo.py`, `main.py`
+
+Se transforma la clase base `Vehiculo` en una **Clase Base Abstracta** mediante la herencia de `ABC` del módulo `abc` y la aplicación del decorador `@abstractmethod` sobre el método `tarifa_hora()`. Esto impide la instanciación directa de `Vehiculo` (lanzando `TypeError`) y establece el contrato tarifario que deben implementar obligatoriamente las subclases concretas. Se actualiza `main.py` comentando minuciosamente cada línea para verificar tanto la ejecución de las subclases como el bloqueo de instanciación directa de `Vehiculo`.
+
+```python
+from abc import ABC, abstractmethod
+
+class Vehiculo(ABC):
+    ...
+    @abstractmethod
+    def tarifa_hora(self) -> int:
+        pass
+```
+
+---
+
 ## 🛠️ Estructura y Plan de Desarrollo Futuro
 
 1. **Gestión de Clientes y Personal:** Registro de propietarios, mecánicos y roles del taller.
@@ -278,4 +295,4 @@ def entregar(self) -> None:
 - **v0.2.0:** Clase `Vehiculo` completa con encapsulamiento, `@property`, setter con validación y método `tarifa_hora()`.
 - **v0.3.0:** Jerarquía de herencia con `Auto`, `Moto` y `Camion`. Polimorfismo aplicado en `tarifa_hora()`.
 - **v0.3.1:** Validación de precondiciones de estado para `ingresar()` y `entregar()` en la clase base `Vehiculo`.
-
+- **v0.4.0:** Transformación de `Vehiculo` en clase base abstracta (`ABC`) con `@abstractmethod` en `tarifa_hora()`.

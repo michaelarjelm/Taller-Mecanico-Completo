@@ -1,5 +1,7 @@
-# Clase Vehiculo: Representa la plantilla base para los vehículos del taller mecánico.
-class Vehiculo:
+from abc import ABC, abstractmethod
+
+# Clase Vehiculo: Representa la plantilla base abstracta para los vehículos del taller mecánico.
+class Vehiculo(ABC):
 
     # Método constructor que inicializa un nuevo objeto de la clase Vehiculo
     def __init__(self, patente: str, anio: int):
@@ -54,8 +56,8 @@ class Vehiculo:
         # Cambia el estado del atributo privado __en_taller a False
         self.__en_taller = False
 
-    # Método público que retorna el costo tarifario por hora de reparación del vehículo
-
+    # Método abstracto que define el contrato tarifario por hora de reparación para las subclases
+    @abstractmethod
     def tarifa_hora(self) -> int:
-        # Retorna el valor entero de 5000 correspondiente a la tarifa base por hora
-        return 5000
+        pass
+
