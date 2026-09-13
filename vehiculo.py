@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
+# Importación de la excepción personalizada VehiculoNoIngresadoError desde el paquete Excepciones
+from Excepciones.vehiculo_no_ingresado_error import VehiculoNoIngresadoError
 
 # Clase Vehiculo: Representa la plantilla base abstracta para los vehículos del taller mecánico.
 class Vehiculo(ABC):
+
 
     # Método constructor que inicializa un nuevo objeto de la clase Vehiculo
     def __init__(self, patente: str, anio: int):
@@ -52,9 +55,11 @@ class Vehiculo(ABC):
     def entregar(self) -> None:
         # Valida que el vehículo esté en el taller antes de proceder con su entrega
         if not self.__en_taller:
-            raise ValueError("El vehículo no se encuentra en el taller, no se puede entregar.")
+            # Lanza la excepción personalizada VehiculoNoIngresadoError pasando la patente
+            raise VehiculoNoIngresadoError(self.patente)
         # Cambia el estado del atributo privado __en_taller a False
         self.__en_taller = False
+
 
     # Método abstracto que define el contrato tarifario por hora de reparación para las subclases
     @abstractmethod

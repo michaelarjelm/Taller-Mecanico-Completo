@@ -10,93 +10,84 @@ from moto import Moto
 # Importación de la subclase Camion desde el módulo camion
 from camion import Camion
 
+# Importación de la excepción personalizada VehiculoNoIngresadoError desde el paquete Excepciones
+from Excepciones.vehiculo_no_ingresado_error import VehiculoNoIngresadoError
 
-# --- PRUEBA 1: Estructura try / except (múltiples bloques) / finally para patente inválida ---
 
-# Se inicia el bloque try para evaluar la creación de un objeto susceptible a errores
+# --- PRUEBA 1: Captura de ValueError al crear un Auto con patente inválida ---
+
+# Se inicia el bloque try para evaluar la instanciación con datos inválidos
 try:
-    # Mensaje en consola indicando el inicio del primer intento de instanciación
+    # Mensaje en consola indicando el inicio de la prueba de patente inválida
     print("=== CASO 1: Intentando crear un Auto con patente inválida ('AB 12') ===")
     
-    # Intento de crear un Auto con patente con menos de 6 caracteres y con un espacio en blanco
+    # Intento de crear un Auto con patente corta y con espacio
     auto_invalido = Auto("AB 12", 2021)
 
-# Primer bloque except: captura errores de datos o formato (ValueError lanzado por el setter)
+# Captura la excepción ValueError lanzada por la validación de la patente
 except ValueError as error:
-    # Muestra el mensaje específico del ValueError recibido desde la clase Vehiculo
+    # Imprime el mensaje específico de error de valor recibido
     print(f"[ERROR DE VALOR CAPTURADO] {error}")
 
-# Segundo bloque except: captura errores de tipo (TypeError en caso de tipos de datos o instanciación)
+# Captura la excepción TypeError en caso de tipo de dato inadecuado
 except TypeError as error:
-    # Muestra el mensaje específico de un error de tipo
+    # Imprime el mensaje de error de tipo
     print(f"[ERROR DE TIPO CAPTURADO] {error}")
 
-# Bloque except genérico: captura cualquier otra excepción no contemplada previamente
-except Exception as error:
-    # Muestra el mensaje de cualquier otro error inesperado
-    print(f"[ERROR INESPERADO CAPTURADO] {error}")
-
-# Bloque finally: se ejecuta SIEMPRE al terminar el bloque try/except, sin importar si hubo error o no
+# Bloque finally garantizado al terminar la prueba
 finally:
-    # Informa al usuario que el proceso e intento de creación ha finalizado
+    # Muestra mensaje indicando el fin del intento de creación
     print("El intento de creación del valor ha finalizado.\n")
 
 
-# --- PRUEBA 2: Estructura try / except (múltiples bloques) / finally para clase abstracta ---
+# --- PRUEBA 2: Captura de la excepción personalizada VehiculoNoIngresadoError ---
 
-# Se inicia un segundo bloque try para evaluar el intento de instanciar la clase base abstracta
+# Se inicia el bloque try para evaluar el intento de entregar un vehículo que no está en el taller
 try:
-    # Mensaje en consola indicando el inicio del segundo intento de instanciación
-    print("=== CASO 2: Intentando instanciar la clase base abstracta Vehiculo directamente ===")
+    # Mensaje en consola indicando la prueba de entrega sin haber ingresado previamente
+    print("=== CASO 2: Intentando entregar una Moto que NO se encuentra en el taller ===")
     
-    # Intento de instanciar Vehiculo directamente (provocará un TypeError al ser una clase ABC)
-    vehiculo_base = Vehiculo("VEH123", 2020)
+    # Creación de una instancia válida de Moto
+    moto1 = Moto("MOT123", 2022)
+    
+    # Intento de entregar la moto directamente (lanzará VehiculoNoIngresadoError)
+    moto1.entregar()
 
-# Primer bloque except: captura errores de valor (ValueError)
+# Captura específica de la excepción personalizada VehiculoNoIngresadoError
+except VehiculoNoIngresadoError as error:
+    # Imprime el mensaje personalizado generado por VehiculoNoIngresadoError
+    print(f"[EXCEPCION PERSONALIZADA CAPTURADA] {error}")
+
+# Captura de resguardo para ValueError
 except ValueError as error:
-    # Muestra el mensaje de un ValueError
+    # Imprime mensaje en caso de error de valor
     print(f"[ERROR DE VALOR CAPTURADO] {error}")
 
-# Segundo bloque except: captura el TypeError generado por intentar instanciar la clase abstracta
-except TypeError as error:
-    # Muestra el mensaje del TypeError lanzado por Python al intentar instanciar una clase ABC
-    print(f"[ERROR DE TIPO CAPTURADO] {error}")
-
-# Bloque except genérico: captura cualquier otro error no especificado
-except Exception as error:
-    # Muestra el mensaje de cualquier otro error
-    print(f"[ERROR INESPERADO CAPTURADO] {error}")
-
-# Bloque finally: se ejecuta de forma garantizada al finalizar el bloque de control
+# Bloque finally garantizado al terminar la prueba
 finally:
-    # Informa al usuario que el proceso e intento de creación ha finalizado
-    print("El intento de creación del valor ha finalizado.\n")
+    # Muestra mensaje indicando el fin del intento de entrega
+    print("El intento de entrega del vehículo ha finalizado.\n")
 
 
-# --- PRUEBA 3: Flujo normal con creación exitosa de objetos válidos ---
+# --- PRUEBA 3: Flujo normal con operaciones válidas ---
 
-# Mensaje en consola indicando el inicio del flujo normal
-print("=== CASO 3: Creación e ingreso exitoso de objetos válidos ===")
+# Mensaje en consola indicando inicio de operaciones válidas
+print("=== CASO 3: Flujo normal de ingreso y consulta de vehículos válidos ===")
 
-# Creación de una instancia de Auto con patente válida de 7 caracteres sin espacios
+# Creación de instancia válida de Auto
 auto1 = Auto("AB123CD", 2021)
 
-# Creación de una instancia de Moto con patente válida de 6 caracteres sin espacios
-moto1 = Moto("MOT123", 2022)
-
-# Creación de una instancia de Camion con patente válida, año y capacidad de carga en kg
+# Creación de instancia válida de Camión
 camion1 = Camion("CAM456", 2018, 5000)
 
-# Registro del ingreso del automóvil al taller mediante el método ingresar()
+# Registro de ingreso exitoso del auto al taller
 auto1.ingresar()
 
-# Muestra en consola los datos del Auto demostrando herencia y el método tarifa_hora()
+# Muestra información del Auto
 print(f"Auto - Patente: {auto1.patente}, Año: {auto1.anio}, ¿En taller?: {auto1.en_taller}, Tarifa/Hora: ${auto1.tarifa_hora()}")
 
-# Muestra en consola los datos de la Moto demostrando herencia y su tarifa_hora() propia
-print(f"Moto - Patente: {moto1.patente}, Año: {moto1.anio}, ¿En taller?: {moto1.en_taller}, Tarifa/Hora: ${moto1.tarifa_hora()}")
-
-# Muestra en consola los datos del Camión demostrando su atributo exclusivo capacidad_carga
+# Muestra información del Camión
 print(f"Camión - Patente: {camion1.patente}, Año: {camion1.anio}, ¿En taller?: {camion1.en_taller}, Tarifa/Hora: ${camion1.tarifa_hora()}, Capacidad Carga: {camion1.capacidad_carga} kg")
+
 
 

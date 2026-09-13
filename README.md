@@ -315,6 +315,20 @@ finally:
 
 ---
 
+### ✅ Commit 20 — `feat: creación de excepción personalizada VehiculoNoIngresadoError`
+**Archivos:** `Excepciones/vehiculo_no_ingresado_error.py`, `Excepciones/__init__.py`, `vehiculo.py`, `main.py`
+
+Se crea el paquete `Excepciones` con la clase de excepción personalizada `VehiculoNoIngresadoError`, que hereda de `Exception`. Su constructor recibe la patente del vehículo y construye un mensaje explicativo enviándolo a `super().__init__()`. En `vehiculo.py`, se modifica el método `entregar()` para lanzar esta excepción personalizada (`VehiculoNoIngresadoError(self.patente)`) en lugar de `ValueError`. En `main.py`, se incluye la prueba demostrativa de captura de `VehiculoNoIngresadoError` usando `try...except...finally`.
+
+```python
+class VehiculoNoIngresadoError(Exception):
+    def __init__(self, patente: str):
+        mensaje = f"El vehículo con patente '{patente}' no se encuentra en el taller, no se puede entregar."
+        super().__init__(mensaje)
+```
+
+---
+
 ## 🛠️ Estructura y Plan de Desarrollo Futuro
 
 1. **Gestión de Clientes y Personal:** Registro de propietarios, mecánicos y roles del taller.
@@ -332,5 +346,7 @@ finally:
 - **v0.4.0:** Transformación de `Vehiculo` en clase base abstracta (`ABC`) con `@abstractmethod` en `tarifa_hora()`.
 - **v0.4.1:** Demostración pedagógica del manejo de excepciones con `try...except` en `main.py`.
 - **v0.4.2:** Estructura completa con múltiples `except` (`ValueError`, `TypeError`) y bloque `finally` en `main.py`.
+- **v0.5.0:** Excepción personalizada `VehiculoNoIngresadoError` en el paquete `Excepciones` e integración en `Vehiculo.entregar()`.
+
 
 
