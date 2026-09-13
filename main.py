@@ -1,17 +1,21 @@
-﻿# ImportaciÃ³n de la clase Vehiculo desde el mÃ³dulo vehiculo
-from vehiculo import Vehiculo
+# Importación de las subclases Auto, Moto y Camion desde sus respectivos módulos
+from auto import Auto
+from moto import Moto
+from camion import Camion
 
-# CreaciÃ³n de la primera instancia v1 con patente 'KXPR84' y aÃ±o 2019
-v1 = Vehiculo("KXPR84", 2019)
+# Creación de una instancia de Auto heredando el constructor de Vehiculo
+auto1 = Auto("AB123CD", 2021)
 
-# CreaciÃ³n de la segunda instancia v2 con patente 'JKLM12' y aÃ±o 2016
-v2 = Vehiculo("JKLM12", 2016)
+# Creación de una instancia de Moto heredando el constructor de Vehiculo
+moto1 = Moto("MOT123", 2022)
 
-# Se registra el ingreso al taller Ãºnicamente para el vehÃ­culo v1
-v1.ingresar()
+# Creación de una instancia de Camion especificando patente, año y su capacidad de carga (5000 kg)
+camion1 = Camion("CAM456", 2018, 5000)
 
-# ImpresiÃ³n de los datos del vehÃ­culo v1 usando las propiedades patente y en_taller
-print(f"VehÃ­culo 1 - Patente: {v1.patente}, Â¿En taller?: {v1.en_taller}")
+# Invocación del método heredado ingresar() en la instancia de Auto
+auto1.ingresar()
 
-# ImpresiÃ³n de los datos del vehÃ­culo v2 usando las propiedades patente y en_taller
-print(f"VehÃ­culo 2 - Patente: {v2.patente}, Â¿En taller?: {v2.en_taller}")
+# Impresión de datos demostrando la herencia y el atributo propio capacidad_carga de Camion
+print(f"Auto - Patente: {auto1.patente}, Año: {auto1.anio}, ¿En taller?: {auto1.en_taller}, Tarifa/Hora: ${auto1.tarifa_hora()}")
+print(f"Moto - Patente: {moto1.patente}, Año: {moto1.anio}, ¿En taller?: {moto1.en_taller}, Tarifa/Hora: ${moto1.tarifa_hora()}")
+print(f"Camión - Patente: {camion1.patente}, Año: {camion1.anio}, ¿En taller?: {camion1.en_taller}, Tarifa/Hora: ${camion1.tarifa_hora()}, Capacidad Carga: {camion1.capacidad_carga} kg")

@@ -1,39 +1,54 @@
-﻿# Clase Vehiculo: Representa la plantilla base para los vehÃ­culos del taller mecÃ¡nico.
+# Clase Vehiculo: Representa la plantilla base para los vehículos del taller mecánico.
 class Vehiculo:
 
-    # MÃ©todo constructor que inicializa un nuevo objeto de la clase Vehiculo
+    # Método constructor que inicializa un nuevo objeto de la clase Vehiculo
     def __init__(self, patente: str, anio: int):
-        # Inicializa el atributo privado __patente con el valor de la patente recibida
-        self.__patente = patente
-        # Inicializa el atributo privado __anio con el valor del aÃ±o recibido
+        # Asigna la patente a través del setter para ejecutar la validación al crear el objeto
+        self.patente = patente
+        # Inicializa el atributo privado __anio con el valor del año recibido
         self.__anio = anio
-        # Inicializa el atributo privado __en_taller en False (el vehÃ­culo parte fuera del taller)
+        # Inicializa el atributo privado __en_taller en False (el vehículo parte fuera del taller)
         self.__en_taller = False
 
-    # @property transforma el mÃ©todo en una propiedad de solo lectura para acceder a __patente como si fuera un atributo sintÃ¡cticamente (sin parÃ©ntesis)
+    # @property transforma el método en una propiedad de lectura para acceder a __patente
     @property
     def patente(self) -> str:
         # Retorna el valor del atributo privado __patente
         return self.__patente
 
-    # @property transforma el mÃ©todo en una propiedad de solo lectura para acceder a __anio como si fuera un atributo sintÃ¡cticamente (sin parÃ©ntesis)
+    # @patente.setter define la lógica de validación e inserción al modificar la patente
+    @patente.setter
+    def patente(self, nueva_patente: str) -> None:
+        # Valida que la patente tenga al menos 6 caracteres y no contenga espacios en blanco
+        if len(nueva_patente) < 6 or " " in nueva_patente:
+            # Lanza una excepción de tipo ValueError si la patente no cumple con las reglas de negocio
+            raise ValueError("La patente debe tener al menos 6 caracteres y no contener espacios.")
+        # Asigna el nuevo valor al atributo privado __patente una vez superada la validación
+        self.__patente = nueva_patente
+
+    # @property transforma el método en una propiedad para acceder a __anio
     @property
     def anio(self) -> int:
         # Retorna el valor del atributo privado __anio
         return self.__anio
 
-    # @property transforma el mÃ©todo en una propiedad de solo lectura para acceder a __en_taller como si fuera un atributo sintÃ¡cticamente (sin parÃ©ntesis)
+    # @property transforma el método en una propiedad para acceder a __en_taller
     @property
     def en_taller(self) -> bool:
         # Retorna el valor booleano del atributo privado __en_taller
         return self.__en_taller
 
-    # MÃ©todo pÃºblico para registrar el ingreso del vehÃ­culo al taller mecÃ¡nico
+    # Método público para registrar el ingreso del vehículo al taller mecánico
     def ingresar(self) -> None:
         # Cambia el estado del atributo privado __en_taller a True
         self.__en_taller = True
 
-    # MÃ©todo pÃºblico para registrar la entrega del vehÃ­culo sacÃ¡ndolo del taller
+    # Método público para registrar la entrega del vehículo sacándolo del taller
     def entregar(self) -> None:
         # Cambia el estado del atributo privado __en_taller a False
         self.__en_taller = False
+
+    # Método público que retorna el costo tarifario por hora de reparación del vehículo
+    def tarifa_hora(self) -> int:
+        # Retorna el valor entero de 5000 correspondiente a la tarifa base por hora
+        return 5000
