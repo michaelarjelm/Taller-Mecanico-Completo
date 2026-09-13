@@ -245,6 +245,25 @@ def patente(self, nueva_patente: str) -> None:
 
 ---
 
+### ✅ Commit 16 — `feat: validación de estado preexistente en métodos ingresar() y entregar()`
+**Archivos:** `vehiculo.py`, `main.py`
+
+Se incorporan **validaciones de precondición** en los métodos de comportamiento de `Vehiculo`. El método `ingresar()` valida que el vehículo no se encuentre previamente dentro del taller (`self.__en_taller == False`), de lo contrario lanza un `ValueError`. De forma análoga, `entregar()` verifica que el vehículo esté en el taller (`self.__en_taller == True`) antes de proceder con su entrega. Se actualizan las pruebas en `main.py` para demostrar ambas reglas de negocio.
+
+```python
+def ingresar(self) -> None:
+    if self.__en_taller:
+        raise ValueError("El vehículo ya se encuentra dentro del taller.")
+    self.__en_taller = True
+
+def entregar(self) -> None:
+    if not self.__en_taller:
+        raise ValueError("El vehículo no se encuentra en el taller, no se puede entregar.")
+    self.__en_taller = False
+```
+
+---
+
 ## 🛠️ Estructura y Plan de Desarrollo Futuro
 
 1. **Gestión de Clientes y Personal:** Registro de propietarios, mecánicos y roles del taller.
@@ -258,3 +277,5 @@ def patente(self, nueva_patente: str) -> None:
 - **v0.1.0 (Inicial):** Estructura base del repositorio y documentación inicial del proyecto.
 - **v0.2.0:** Clase `Vehiculo` completa con encapsulamiento, `@property`, setter con validación y método `tarifa_hora()`.
 - **v0.3.0:** Jerarquía de herencia con `Auto`, `Moto` y `Camion`. Polimorfismo aplicado en `tarifa_hora()`.
+- **v0.3.1:** Validación de precondiciones de estado para `ingresar()` y `entregar()` en la clase base `Vehiculo`.
+

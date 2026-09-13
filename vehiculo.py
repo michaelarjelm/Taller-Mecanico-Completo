@@ -15,7 +15,7 @@ class Vehiculo:
     def patente(self) -> str:
         # Retorna el valor del atributo privado __patente
         return self.__patente
-
+    
     # @patente.setter define la lógica de validación e inserción al modificar la patente
     @patente.setter
     def patente(self, nueva_patente: str) -> None:
@@ -32,7 +32,7 @@ class Vehiculo:
         # Retorna el valor del atributo privado __anio
         return self.__anio
 
-    # @property transforma el método en una propiedad para acceder a __en_taller
+    # @property transforma el método en una propiedad de solo lectura para acceder a __en_taller (sin setter)
     @property
     def en_taller(self) -> bool:
         # Retorna el valor booleano del atributo privado __en_taller
@@ -40,15 +40,22 @@ class Vehiculo:
 
     # Método público para registrar el ingreso del vehículo al taller mecánico
     def ingresar(self) -> None:
+        # Valida que el vehículo no esté ya en el taller antes de registrar su ingreso
+        if self.__en_taller:
+            raise ValueError("El vehículo ya se encuentra dentro del taller.")
         # Cambia el estado del atributo privado __en_taller a True
         self.__en_taller = True
 
     # Método público para registrar la entrega del vehículo sacándolo del taller
     def entregar(self) -> None:
+        # Valida que el vehículo esté en el taller antes de proceder con su entrega
+        if not self.__en_taller:
+            raise ValueError("El vehículo no se encuentra en el taller, no se puede entregar.")
         # Cambia el estado del atributo privado __en_taller a False
         self.__en_taller = False
 
     # Método público que retorna el costo tarifario por hora de reparación del vehículo
+
     def tarifa_hora(self) -> int:
         # Retorna el valor entero de 5000 correspondiente a la tarifa base por hora
         return 5000
